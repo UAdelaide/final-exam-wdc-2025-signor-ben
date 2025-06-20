@@ -11,18 +11,19 @@
 
   <div id="app" class="container py-5">
     <h1 class="mb-4 text-primary">{{ message }}</h1>
-    <p class="lead">Please log in to continue.</p>
+    <p class="lead">please log in to continue.</p>
 
+    <!-- simple login form bound with vue -->
     <form @submit.prevent="login" class="mb-3">
       <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
+        <label for="email" class="form-label">email</label>
         <input v-model="email" type="email" class="form-control" id="email" required>
       </div>
       <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
+        <label for="password" class="form-label">password</label>
         <input v-model="password" type="password" class="form-control" id="password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">login</button>
       <p v-if="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
     </form>
   </div>
