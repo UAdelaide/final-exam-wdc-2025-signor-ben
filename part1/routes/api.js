@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// GET /api/dogs
 router.get('/dogs', async (req, res) => {
   try {
     const [rows] = await db.query(`
