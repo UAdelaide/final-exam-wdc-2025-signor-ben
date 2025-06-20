@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 // use session middleware before your routes so req.session is available
 app.use(session({
   secret: 'superdogsecret', // secret for signing session cookies (use env var later)
-  resave: false,            // don't save session if nothing changed
-  saveUninitialized: true   // save new sessions even if empty
+  resave: false, // don't save session if nothing changed
+  saveUninitialized: true // save new sessions even if empty
 }));
 
 // Routes
