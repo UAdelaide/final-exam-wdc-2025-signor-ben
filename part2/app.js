@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 require('dotenv').config();
 
 const app = express();
@@ -14,6 +15,12 @@ const userRoutes = require('./routes/userRoutes');
 
 app.use('/api/walks', walkRoutes);
 app.use('/api/users', userRoutes);
+
+app.use(session({
+  secret: 'superdogsecret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 // Export the app instead of listening here
 module.exports = app;
