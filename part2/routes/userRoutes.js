@@ -72,6 +72,19 @@ router.post('/logout', (req, res) => {
   });
 });
 
-
+// GET dogs for a specific user (owner)
+router.get('/:id/dogs', async (req, res) => {
+  const ownerId = req.params.id;
+  try {
+    const [rows] = await db.query(
+      'SELECT dog_id, name FROM Dogs WHERE owner_id = ?',
+      [ownerId]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error('Failed to fetch dogs:', err);
+    res.status(500).json({ error: 'Could not retrieve dogs' });
+  }
+});
 
 module.exports = router;
