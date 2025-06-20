@@ -22,6 +22,8 @@ app.use('/api', apiRouter);
 
 async function insertTestData() {
   try {
+    const [rows] = await db.execute('SELECT COUNT(*) AS count FROM Users');
+    if (rows[0].count === 0) {
     // Insert users
     await db.execute(`INSERT IGNORE INTO Users (username, email, password_hash, role)
       VALUES
