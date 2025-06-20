@@ -42,7 +42,11 @@ async function insertTestData() {
     await db.execute(`INSERT IGNORE INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
       SELECT d.dog_id, '2025-06-10 08:00:00', 30, 'Parklands', 'open'
       FROM Dogs d WHERE d.name = 'Max'`);
-        
+
+    console.log('Database seeded successfully.');
+    } else {
+      console.log('Database already has users. Skipping seeding.');
+    }
   } catch (err) {
     console.error('Error inserting test data:', err.message);
   }
