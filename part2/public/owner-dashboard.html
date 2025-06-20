@@ -130,6 +130,23 @@
           error,
           submitWalkRequest
         };
+      }, methods:{
+        async logout() {
+          try {
+            const response = await fetch('/api/users/logout', {
+              method: 'POST',
+              credentials: 'include' // send session cookie
+            });
+
+            if (response.ok) {
+              window.location.href = 'index.html'; // Redirect to login/home
+            } else {
+              console.error('Logout failed');
+            }
+          } catch (err) {
+            console.error('Logout request error:', err);
+          }
+        }
       }
     }).mount('#app');
   </script>
