@@ -42,6 +42,7 @@ async function insertTestData() {
     await db.execute(`INSERT IGNORE INTO WalkRequests (dog_id, requested_time, duration_minutes, location, status)
       SELECT d.dog_id, '2025-06-10 08:00:00', 30, 'Parklands', 'open'
       FROM Dogs d WHERE d.name = 'Max'`);
+        
   } catch (err) {
     console.error('Error inserting test data:', err.message);
   }
