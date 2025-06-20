@@ -26,6 +26,25 @@
       <button type="submit" class="btn btn-primary">login</button>
       <p v-if="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
     </form>
+    <h2 class="mt-5">Our Dogs</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Owner ID</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="dog in dogs" :key="dog.dog_id">
+          <td>{{ dog.name }}</td>
+          <td>{{ dog.size }}</td>
+          <td>{{ dog.owner_id }}</td>
+          <td><img :src="dog.image" alt="Dog image" width="100"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <script>
