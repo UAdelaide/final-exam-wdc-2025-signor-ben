@@ -1,12 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Express</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
-</head>
+  <meta charset="UTF-8">
+  <title>Dog Walk Service</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    /* Bad styling for demonstration */
+    body {
+      background-color: #000;
+      color: #ff0;
+      font-family: Comic Sans MS;
+      font-size: 1.2em;
+      margin: 0;
+      padding: 0;
+      animation: flash 0.5s infinite;
+    }
 
+    @keyframes flash {
+      0% { background-color: black; }
+      50% { background-color: darkred; }
+      100% { background-color: black; }
+    }
+
+    .button {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: hotpink;
+      color: lime;
+      font-weight: bold;
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: yellow;
+    }
+
+    .dog-img {
+      width: 90%;
+      border: 10px dashed cyan;
+    }
+
+    /* Accessibility-breaking */
+    .hidden-label {
+      display: none;
+    }
+  </style>
+</head>
 <body>
-    <h1>Express</h1>
-    <p>Welcome to Express</p>
+  <div id="app">
+    <h1>DOG OF THE DAY (click around until something works!)</h1>
+
+    <!-- No alt text, no labels -->
+    <img :src="dogImage" class="dog-img" :alt="''">
+
+    <button class="button" @click="getDog">show another? maybe?</button>
+
+    <!-- Unlabeled input for more confusion -->
+    <input placeholder="Type stuff here (but what?)">
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          dogImage: ''
+        };
+      },
+      mounted() {
+        this.getDog();
+      },
+      methods: {
+        async getDog() {
+          try {
+            const res = await fetch('https://dog.ceo/api/breeds/image/random');
+            const data = await res.json();
+            this.dogImage = data.message;
+          } catch (e) {
+            alert('uh oh... try again maybe?');
+          }
+        }
+      }
+    }).mount('#app');
+  </script>
 </body>
 </html>
