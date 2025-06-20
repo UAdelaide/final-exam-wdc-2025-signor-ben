@@ -91,6 +91,7 @@
         }
 
         onMounted(() => {
+          getCurrentUser();
           loadWalkRequests();
         });
 
@@ -98,7 +99,8 @@
           walks,
           message,
           error,
-          applyToWalk
+          applyToWalk,
+          currentUser
         };
       }, methods:{
         async logout() {
