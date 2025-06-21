@@ -5,38 +5,61 @@
   <title>Dog Walk Service</title>
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <style>
-    /* Bad styling for demonstration */
     body {
       background-color: #000;
-      color: #ff0;
-      font-family: Comic Sans MS;
-      font-size: 1.2em;
+      color: #0ff;
+      font-family: Papyrus, Comic Sans MS;
+      font-size: 1.4em;
+      animation: flash 0.3s infinite;
       margin: 0;
-      padding: 0;
-      animation: flash 0.5s infinite;
+      padding: 40px;
+      overflow-x: scroll;
     }
+
     @keyframes flash {
       0% { background-color: black; }
-      50% { background-color: darkred; }
-      100% { background-color: lightseagreen; }
+      25% { background-color: magenta; }
+      50% { background-color: orange; }
+      75% { background-color: navy; }
+      100% { background-color: green; }
     }
+
     h1 {
-      text-align: right;
+      font-size: 3em;
+      text-align: center;
+      text-shadow: 2px 2px red;
     }
-    .button {
-      margin-top: 50px;
-      padding: 20px;
-      background-color: white;
-      color: yellow;
-      font-weight: bold;
-      border: none;
-      border-radius: 0;
-      cursor: pointer;
-    }
+
     .dog-img {
-      width: 90%;
-      border: 10px dashed cyan;
+      width: 1200px;
+      border: 20px double lime;
+      transform: rotate(5deg);
     }
+
+    .button {
+      margin-top: 100px;
+      padding: 5px;
+      font-size: 0.8em;
+      position: absolute;
+      left: 90%;
+      background-color: white;
+      color: purple;
+      border: 3px dotted yellow;
+      cursor: crosshair;
+    }
+
+    .weird-input {
+      margin-top: 80px;
+      background: none;
+      border: 2px solid red;
+      color: lime;
+      width: 300px;
+      height: 50px;
+      font-size: 1.5em;
+      writing-mode: vertical-rl;
+      transform: rotate(-90deg);
+    }
+
     .hidden-label {
       display: none;
     }
@@ -44,11 +67,25 @@
 </head>
 <body>
   <div id="app">
-    <h1>DOG OF THE DAY</h1>
-    <img :src="dogImage" class="dog-img" :alt="''">
-    <button class="button" @click="getDog">what does thiiisss do?</button>
-    <input placeholder="           ?   ">
+    <h1>DOG OF<br>THE<br>DAAAAY!</h1>
+
+    <!-- No semantic role or helpful alt -->
+    <img :src="dogImage" class="dog-img" alt="">
+
+    <!-- Button is hard to reach -->
+    <button class="button" @click="getDog">Click? Why tho?</button>
+
+    <!-- Mystery input field -->
+    <label for="secret" class="hidden-label">Dog thoughts</label>
+    <input id="secret" class="weird-input" placeholder="Type... or not?">
+
+    <!-- Confusing instructions -->
+    <p>
+      To view today’s random maybe-not-real pupperoni pic, just maybe smash that button above or don’t.
+      We don’t know what happens next. It's chaos. Welcome to the barkzone.
+    </p>
   </div>
+
   <script>
     const { createApp } = Vue;
     createApp({
@@ -67,7 +104,7 @@
             const data = await res.json();
             this.dogImage = data.message;
           } catch (e) {
-            alert('uh oh... try again maybe?');
+            alert('oh no. chaos again.');
           }
         }
       }
